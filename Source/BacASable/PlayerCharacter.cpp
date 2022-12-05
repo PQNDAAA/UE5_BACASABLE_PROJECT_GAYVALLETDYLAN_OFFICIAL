@@ -26,13 +26,13 @@ void APlayerCharacter::Tick(float DeltaTime)
 }
 
 // Called to bind functionality to input
-void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void APlayerCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 	PlayerInputComponent->BindAxis("Forward", this, &APlayerCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("Right", this, &APlayerCharacter::MoveRight);
-
+	
 }
 
 void APlayerCharacter::MoveForward(float value)
@@ -52,6 +52,55 @@ void APlayerCharacter::MoveRight(float value)
 		AddMovementInput(dir, value);
 	}
 }
+
+void APlayerCharacter::PressSprint()
+{
+	if (stamina > 10.0f && isStaminaOn == false) {
+		GetCharacterMovement()->MaxWalkSpeed = 850;
+		isStaminaOn = true;
+	}
+}
+
+void APlayerCharacter::ReleaseSprint()
+{
+	GetCharacterMovement()->MaxWalkSpeed = 350;
+	isStaminaOn = false;
+}
+
+void APlayerCharacter::AddStamina()
+{
+	if (isStaminaOn == false && stamina <= 100.0f) {
+		stamina += 0.1f;
+	}
+}
+
+void APlayerCharacter::RemoveStamina()
+{
+	if (isStaminaOn) {
+		stamina -= 0.1f;
+	}
+}
+
+void APlayerCharacter::UpdateStamina()
+{
+	if (stamina <= 10.0f && isStaminaOn == true) {
+		GetCharacterMovement()->MaxWalkSpeed = 350;
+		isStaminaOn = false;
+	}
+}
+
+//void APlayerCharacter::AnalyzeSprint()
+//{
+//	if (isStaminaOn) {
+//		FMath::Clamp(0, 100);
+//	}
+//
+//
+//	if (stamina <= 10) {
+//		GetCharacterMovement()->MaxWalkSpeed = 350;
+//		isStaminaOn = false;
+//	}
+//}
 
 void APlayerCharacter::AnalyzeDifference()
 {

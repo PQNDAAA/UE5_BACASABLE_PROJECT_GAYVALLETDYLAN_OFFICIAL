@@ -15,9 +15,6 @@ AMyActor::AMyActor()
 
 	TriggerBox->OnComponentBeginOverlap.AddDynamic(this, &AMyActor::OnOverlapBegin);
 	TriggerBox->OnComponentEndOverlap.AddDynamic(this, &AMyActor::OnOverlapEnd);
-
-
-
 }
 
 // Called when the game starts or when spawned
@@ -38,19 +35,19 @@ void AMyActor::Tick(float DeltaTime)
 
 void AMyActor::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (OtherActor && OtherActor != this && OtherComp)
+	if (Cast<APlayerCharacter>(OtherActor) != nullptr && OtherActor != this && OtherComp)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap Begin"));
 
-		 APlayerCharacter* playerClass = Cast<APlayerCharacter>(OtherActor);
+		APlayerCharacter* playerClass = Cast<APlayerCharacter>(OtherActor);
 
-		playerClass->setHealth(playerClass->getHealth() - 10);
+		playerClass->setHealth(playerClass->getHealth() - damage);
 	}
 }
 
 void AMyActor::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	if (OtherActor && OtherActor != this && OtherComp)
+	if (Cast<APlayerCharacter>(OtherActor) != nullptr && OtherActor != this && OtherComp)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap End"));
 	}

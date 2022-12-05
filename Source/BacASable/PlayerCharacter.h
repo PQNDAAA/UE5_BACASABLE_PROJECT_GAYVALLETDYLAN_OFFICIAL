@@ -17,18 +17,23 @@ public:
 	// Sets default values for this character's properties
 	APlayerCharacter();
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
-	float health = 100;
+		float health = 100;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
-	int maxHealth = 100;
+		int maxHealth = 100;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Falling")
 		float startHeight;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Falling")
 		float endHeight;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Falling")
 		float fallDifference;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-	float speed = 600;
+		float speed = 600;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stamina")
+		float stamina = 100;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stamina")
+		bool isStaminaOn = false;
+
+	UCharacterMovementComponent* characterMovement = GetCharacterMovement();
 
 protected:
 	// Called when the game starts or when spawned
@@ -45,37 +50,38 @@ public:
 		void MoveForward(float value);
 	UFUNCTION(BlueprintCallable, Category = "Movement")
 		void MoveRight(float value);
-
+	UFUNCTION(BlueprintCallable, Category = "Movement")
+		void PressSprint();
+	UFUNCTION(BlueprintCallable, Category = "Movement")
+		void ReleaseSprint();
+	UFUNCTION(BlueprintCallable, Category = "Movement")
+		void AddStamina();
+	UFUNCTION(BlueprintCallable, Category = "Movement")
+		void RemoveStamina();
+	UFUNCTION(BlueprintCallable, Category = "Movement")
+		void UpdateStamina();
 	UFUNCTION(BlueprintCallable, Category = "Falling")
 		float getStartHeight() const { return this->GetActorLocation().Z; }
-
 	UFUNCTION(BlueprintCallable, Category = "Falling")
 		float getEndHeight() const { return this->GetActorLocation().Z; }
-
 	UFUNCTION(BlueprintCallable, Category = "Falling")
 		void setStartHeight(float var) { startHeight = var; }
-
 	UFUNCTION(BlueprintCallable, Category = "Falling")
 		void setEndHeight(float var) { endHeight = var; }
-
 	UFUNCTION(BlueprintCallable, Category = "Falling")
 		float getFallDifference() const { return startHeight - endHeight; }
-
 	UFUNCTION(BlueprintCallable, Category = "Falling")
 		void setFallDifference(float var) { fallDifference = var; }
-
 	UFUNCTION(BlueprintCallable, Category = "Falling")
 		void AnalyzeDifference();
-	//get 
 	UFUNCTION(BlueprintCallable, Category = "Health")
-		float getHealth() const { return health; }
-
-	//set 
+		float getHealth() const { return health; } 
 	UFUNCTION(BlueprintCallable, Category = "Health")
 		void setHealth(int var) { health = var; }
-
-	//get 
 	UFUNCTION(BlueprintCallable, Category = "Health")
 		int getMaxHealth() const { return maxHealth; }
-
+	UFUNCTION(BlueprintCallable, Category = "Stamina")
+		float getStamina() const { return stamina; }
+	UFUNCTION(BlueprintCallable, Category = "Stamina")
+		void setStamina(float var) { stamina = var; }
 };
