@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Components/BoxComponent.h"
-#include "PlayerCharacter.h"
 #include "MyActor.generated.h"
 
 

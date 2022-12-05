@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "PlayerCharacter.h"
 #include "MyActor.h"
 
 // Sets default values
@@ -42,7 +42,8 @@ void AMyActor::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Other
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap Begin"));
 
-		APlayerCharacter* playerClass = Cast<APlayerCharacter>(GetOwner());
+		 APlayerCharacter* playerClass = Cast<APlayerCharacter>(OtherActor);
+
 		playerClass->setHealth(playerClass->getHealth() - 10);
 	}
 }
