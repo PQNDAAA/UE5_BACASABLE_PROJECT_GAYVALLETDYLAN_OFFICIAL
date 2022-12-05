@@ -41,6 +41,9 @@ void AMyActor::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Other
 	if (OtherActor && OtherActor != this && OtherComp)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap Begin"));
+
+		APlayerCharacter* playerClass = Cast<APlayerCharacter>(GetOwner());
+		playerClass->setHealth(playerClass->getHealth() - 10);
 	}
 }
 
