@@ -56,7 +56,7 @@ void APlayerCharacter::MoveRight(float value)
 void APlayerCharacter::PressSprint()
 {
 	if (stamina > 10.0f && isStaminaOn == false) {
-		GetCharacterMovement()->MaxWalkSpeed = 850;
+		GetCharacterMovement()->MaxWalkSpeed = 650;
 		isStaminaOn = true;
 	}
 }
@@ -83,7 +83,10 @@ void APlayerCharacter::RemoveStamina()
 
 void APlayerCharacter::UpdateStamina()
 {
-	if (stamina <= 10.0f && isStaminaOn == true) {
+	if (stamina <= 10.0f && isStaminaOn) {
+		GetCharacterMovement()->MaxWalkSpeed = 550;
+	}
+	if (stamina <= 0.0f && isStaminaOn) {
 		GetCharacterMovement()->MaxWalkSpeed = 350;
 		isStaminaOn = false;
 	}
