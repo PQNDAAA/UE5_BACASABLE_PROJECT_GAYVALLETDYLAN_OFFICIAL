@@ -32,6 +32,9 @@ public:
 		float stamina = 100;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stamina")
 		bool isStaminaOn = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hunger")
+		float hunger = 100;
+
 
 	UCharacterMovementComponent* characterMovement = GetCharacterMovement();
 
@@ -84,4 +87,8 @@ public:
 		float getStamina() const { return stamina; }
 	UFUNCTION(BlueprintCallable, Category = "Stamina")
 		void setStamina(float var) { stamina = var; }
+	UFUNCTION(BlueprintCallable, Category = "Hunger")
+		void setHunger(float var) { hunger = var; }
+	UFUNCTION(BlueprintCallable, Category = "Hunger")
+		float getHunger() const { return hunger; }
 };
