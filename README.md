@@ -10,7 +10,7 @@ Sprint : R
 Pickup : E
 Left Click : Destroy Tree,Stone,Flower........
 
-I made : 
+I made in C++: 
 - Hunger System (15%)
 - Stamina System (100%)
 - Sprint (100%)
